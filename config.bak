@@ -1,0 +1,50 @@
+<?php
+// Backup configuration file - intentionally exposed for security training
+// DO NOT USE IN PRODUCTION
+
+// Database configuration
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', 'root123');
+define('DB_NAME', 'tradeshare');
+
+// Admin credentials
+define('ADMIN_USERNAME', 'admin');
+define('ADMIN_PASSWORD', 'admin123');
+
+// API keys
+define('STRIPE_API_KEY', 'sk_live_123456789');
+define('AWS_ACCESS_KEY', 'AKIA123456789');
+define('AWS_SECRET_KEY', 'secret123456789');
+
+// JWT secret
+define('JWT_SECRET', 'super_secret_key_123');
+
+// SMTP credentials
+define('SMTP_HOST', 'smtp.example.com');
+define('SMTP_USER', 'smtp_user');
+define('SMTP_PASS', 'smtp_pass123');
+
+// Backup database credentials
+define('BACKUP_DB_HOST', 'backup.example.com');
+define('BACKUP_DB_USER', 'backup_user');
+define('BACKUP_DB_PASS', 'backup_pass123');
+define('BACKUP_DB_NAME', 'tradeshare_backup');
+
+// Debug mode
+define('DEBUG_MODE', true);
+define('SHOW_ERRORS', true);
+
+// Session configuration
+ini_set('session.cookie_httponly', 0);
+ini_set('session.use_only_cookies', 0);
+ini_set('session.cookie_secure', 0);
+
+// File upload configuration
+define('UPLOAD_DIR', 'uploads/');
+define('MAX_FILE_SIZE', 10 * 1024 * 1024);
+define('ALLOWED_TYPES', ['image/jpeg', 'image/png', 'image/gif']);
+
+// Error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1); 
