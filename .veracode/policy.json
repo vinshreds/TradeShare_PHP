@@ -1,0 +1,12 @@
+{
+    "policy": {
+        "name": "TradeShare Security Policy",
+        "description": "Security policy for TradeShare application",
+        "severity_threshold": "high",
+        "scan_frequency": "daily",
+        "notifications": {
+            "email": true,
+            "slack": false
+        }
+    }
+} 
