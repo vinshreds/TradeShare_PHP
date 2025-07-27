@@ -1,30 +1,42 @@
-# 🛍️ TradeShare
+# TradeShare
 
-[![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue.svg)](https://php.net)
-[![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange.svg)](https://mysql.com)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+TradeShare is a modern web platform that connects skilled tradesmen with clients, facilitating service sharing and management in a secure and efficient environment.
 
-> ⚠️ **IMPORTANT**: This is an intentionally vulnerable web application for security training purposes. Do not deploy in production or expose to the internet.
+## 🌟 Features
 
-TradeShare is a freelance services marketplace built with PHP and MySQL, designed specifically for security training and vulnerability assessment. It intentionally implements various security vulnerabilities to help developers understand and practice identifying common web application security issues.
+- **User Authentication**
+  - Secure login and registration system
+  - Profile management for tradesmen and clients
+  - Role-based access control
 
-## 🎯 Features
+- **Service Management**
+  - Create and manage service listings
+  - Real-time service availability updates
+  - Service categorization and search
 
-- 👤 User registration and authentication
-- 📝 Service posting and management
-- 💬 Real-time messaging system
-- 👤 Profile management with image uploads
-- 👨‍💼 Admin dashboard
-- 🔌 RESTful API endpoints
+- **Messaging System**
+  - In-app messaging between tradesmen and clients
+  - Real-time notifications
+  - Message history and management
 
-## 🚀 Quick Start
+- **Profile Management**
+  - Professional profile creation
+  - Portfolio showcase
+  - Review and rating system
+
+- **Admin Dashboard**
+  - User management
+  - Service moderation
+  - System monitoring
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - PHP 7.4 or higher
 - MySQL 5.7 or higher
-- Apache/Nginx web server (or PHP's built-in server)
-- Composer (optional, for dependencies)
+- Apache/Nginx web server
+- Composer (PHP package manager)
 
 ### Installation
 
@@ -34,151 +46,82 @@ TradeShare is a freelance services marketplace built with PHP and MySQL, designe
    cd tradeshare
    ```
 
-2. Create the database:
-   ```sql
-   CREATE DATABASE tradeshare;
+2. Install dependencies:
+   ```bash
+   composer install
    ```
 
-3. Import the database schema:
+3. Set up the database:
    ```bash
-   mysql -u your_username -p tradeshare < schema.sql
+   mysql -u your_username -p your_database < schema.sql
    ```
 
-4. Configure the database connection:
-   ```bash
-   cp config.bak config.php
-   # Edit config.php with your database credentials
-   ```
+4. Configure the application:
+   - Copy `config.bak` to `config.php`
+   - Update database credentials and other settings in `config.php`
 
 5. Set up the web server:
+   - Point your web server to the project directory
+   - Ensure the `uploads` directory is writable
+   - Configure URL rewriting if needed
 
-   **Option 1: Using PHP's built-in server**
-   ```bash
-   php -S localhost:8000
-   ```
+### Environment Setup
 
-   **Option 2: Using Apache**
-   ```bash
-   # Copy files to your web root
-   sudo cp -r * /var/www/html/
-   # Set permissions
-   sudo chown -R www-data:www-data /var/www/html
-   sudo chmod -R 755 /var/www/html
-   ```
+Create a `.env` file in the root directory with the following variables:
+```env
+DB_HOST=localhost
+DB_NAME=tradeshare
+DB_USER=your_username
+DB_PASS=your_password
+APP_URL=http://localhost/tradeshare
+```
 
-6. Create the uploads directory:
-   ```bash
-   mkdir uploads
-   chmod 777 uploads
-   ```
+## 🛠️ Development
 
-7. Visit the application:
-   ```
-   http://localhost:8000
-   ```
+### Project Structure
+```
+tradeshare/
+├── api/            # API endpoints
+├── css/           # Stylesheets
+├── images/        # Static images
+├── uploads/       # User uploads
+├── vendor/        # Composer dependencies
+├── .env           # Environment variables
+├── config.php     # Application configuration
+└── README.md      # This file
+```
 
-## 🔑 Default Credentials
+### Running Tests
+```bash
+composer test
+```
 
-- **Admin User**
-  - Username: `admin`
-  - Password: `admin123`
+## 🔒 Security
 
-- **Test User**
-  - Username: `user`
-  - Password: `user123`
-
-## 🎯 Intentionally Vulnerable Features
-
-### 1. Broken Access Control
-- Service editing/deletion without ownership verification
-- Admin access via URL parameter (`/admin.php?auth=1`)
-- Direct access to user data without proper authorization
-
-### 2. Cryptographic Failures
-- MD5 password hashing
-- Unencrypted sensitive data storage
-- Predictable session IDs
-- No session expiration
-
-### 3. Injection
-- SQL Injection in login, search, and user management
-- No input validation or sanitization
-- Direct concatenation of user input in queries
-
-### 4. Insecure Design
-- Weak password requirements
-- No rate limiting
-- No account lockout
-- Predictable resource IDs
-
-### 5. Security Misconfiguration
-- Exposed `.git` directory
-- Debug mode enabled
-- Detailed error messages
-- Default credentials
-
-### 6. Vulnerable Components
-- Outdated libraries
-- Known vulnerable dependencies
-- Unpatched security issues
-
-### 7. Authentication Failures
-- Weak session management
-- No password complexity requirements
-- No multi-factor authentication
-- Predictable session tokens
-
-### 8. Software and Data Integrity Failures
-- Unsafe `eval()` usage
-- Unsafe JSON handling
-- No integrity checks
-- Unsafe file uploads
-
-### 9. Logging Failures
-- No security event logging
-- No audit trails
-- No login attempt tracking
-- No error logging
-
-### 10. SSRF Vulnerabilities
-- Unsafe URL preview feature
-- No URL validation
-- No allowlist/blocklist
-- Follows redirects
-
-## 🔌 API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/index.php?action=login` | POST | User login |
-| `/api/index.php?action=register` | POST | User registration |
-| `/api/index.php?action=services` | GET | List services |
-| `/api/index.php?action=create_service` | POST | Create service |
-| `/api/index.php?action=update_service` | POST | Update service |
-| `/api/index.php?action=delete_service` | POST | Delete service |
-| `/api/index.php?action=settings` | POST | Update user settings |
-| `/api/index.php?action=url_preview` | GET | URL preview (SSRF) |
-
-## 🎓 Security Training
-
-This application is designed for:
-- Penetration testing practice
-- Security vulnerability assessment
-- OWASP Top 10 vulnerability study
-- Web application security training
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-1. Fork the repository
-2. Create a new branch
-3. Add more vulnerabilities or improve existing ones
-4. Submit a pull request
+- All user inputs are sanitized
+- Passwords are hashed using secure algorithms
+- SQL injection prevention
+- XSS protection
+- CSRF protection
 
 ## 📝 License
 
-This project is for educational purposes only. Use at your own risk.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## ⚠️ Disclaimer
+## 🤝 Contributing
 
-This application is intentionally vulnerable and should ONLY be used in controlled environments for security training and testing. The authors are not responsible for any misuse or damage caused by this application. 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📧 Support
+
+For support, email support@tradeshare.com or open an issue in the GitHub repository.
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors
+- Inspired by the need for better tradesman-client connections
+- Built with modern web technologies 
