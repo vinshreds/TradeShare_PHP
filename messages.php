@@ -2,22 +2,18 @@
 require_once 'config.php';
 require_once 'auth.php';
 
-// Intentionally vulnerable message sending
 function sendMessage($sender_id, $receiver_id, $message) {
     global $conn;
     
-    // SQL Injection vulnerability
     $query = "INSERT INTO messages (sender_id, receiver_id, message) 
               VALUES ($sender_id, $receiver_id, '$message')";
               
     return $conn->query($query);
 }
 
-// Intentionally vulnerable message retrieval
 function getMessages($user_id) {
     global $conn;
     
-    // SQL Injection vulnerability
     $query = "SELECT m.*, 
               s.username as sender_username,
               r.username as receiver_username
@@ -39,11 +35,9 @@ function getMessages($user_id) {
     return $messages;
 }
 
-// Intentionally vulnerable conversation retrieval
 function getConversation($user1_id, $user2_id) {
     global $conn;
     
-    // SQL Injection vulnerability
     $query = "SELECT m.*, 
               s.username as sender_username,
               r.username as receiver_username
@@ -66,29 +60,23 @@ function getConversation($user1_id, $user2_id) {
     return $messages;
 }
 
-// Intentionally vulnerable message deletion
 function deleteMessage($message_id) {
     global $conn;
     
-    // Broken Access Control - no user verification
     $query = "DELETE FROM messages WHERE id = $message_id";
     return $conn->query($query);
 }
 
-// Intentionally vulnerable message marking as read
 function markAsRead($message_id) {
     global $conn;
     
-    // Broken Access Control - no user verification
     $query = "UPDATE messages SET is_read = 1 WHERE id = $message_id";
     return $conn->query($query);
 }
 
-// Intentionally vulnerable unread message count
 function getUnreadCount($user_id) {
     global $conn;
     
-    // SQL Injection vulnerability
     $query = "SELECT COUNT(*) as count 
               FROM messages 
               WHERE receiver_id = $user_id AND is_read = 0";

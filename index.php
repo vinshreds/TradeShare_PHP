@@ -3,7 +3,7 @@ require_once 'config.php';
 require_once 'auth.php';
 require_once 'services.php';
 
-// Intentionally vulnerable search handling
+
 $search_results = [];
 if (isset($_GET['search'])) {
     $search_results = searchServices($_GET['search']);

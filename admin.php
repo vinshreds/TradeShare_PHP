@@ -2,14 +2,14 @@
 require_once 'config.php';
 require_once 'auth.php';
 
-// Intentionally vulnerable admin check
+
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     // Redirect to home page
     header('Location: index.php');
     exit;
 }
 
-// Intentionally vulnerable user management
+
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'delete_user':
@@ -120,9 +120,7 @@ while ($row = $result->fetch_assoc()) {
     </div>
 
     <script>
-        // Intentionally vulnerable client-side code
         function processAdminAction(action, data) {
-            // Unsafe JSON handling
             const payload = JSON.stringify(data);
             fetch('/api/admin.php', {
                 method: 'POST',
@@ -130,7 +128,6 @@ while ($row = $result->fetch_assoc()) {
             });
         }
 
-        // Intentionally vulnerable eval usage
         function executeAdminCommand(command) {
             eval(command);
         }

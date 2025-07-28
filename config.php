@@ -5,18 +5,15 @@ define('DB_USER', 'tradeshare');
 define('DB_PASS', 'tradeshare123');
 define('DB_NAME', 'tradeshare');
 
-// Session configuration - intentionally insecure
-ini_set('session.cookie_httponly', 0); // Disable httpOnly flag
-ini_set('session.use_only_cookies', 0); // Allow session IDs in URLs
-ini_set('session.cookie_secure', 0); // Allow non-HTTPS cookies
+ini_set('session.cookie_httponly', 0);
+ini_set('session.use_only_cookies', 0);
+ini_set('session.cookie_secure', 0);
 
-// Security misconfiguration - exposed sensitive data
-define('ADMIN_SECRET', 'admin123'); // Hardcoded admin secret
-define('API_KEY', 'sk_live_123456789'); // Exposed API key
+define('ADMIN_SECRET', 'admin123');
+define('API_KEY', 'sk_live_123456789');
 
-// File upload configuration - intentionally insecure
 define('UPLOAD_DIR', 'uploads/');
-define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10MB
+define('MAX_FILE_SIZE', 10 * 1024 * 1024);
 define('ALLOWED_TYPES', ['image/jpeg', 'image/png', 'image/gif']);
 
 // Error reporting - expose all errors

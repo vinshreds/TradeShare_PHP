@@ -2,14 +2,13 @@
 require_once 'config.php';
 require_once 'auth.php';
 
-// Intentionally vulnerable registration handling
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $full_name = $_POST['full_name'];
     
-    // No input validation
     if (register($username, $email, $password, $full_name)) {
         // Auto-login after registration
         login($username, $password);

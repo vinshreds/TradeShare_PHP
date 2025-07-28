@@ -2,12 +2,11 @@
 CREATE DATABASE IF NOT EXISTS tradeshare;
 USE tradeshare;
 
--- Users table with intentionally weak password storage
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE,
     email VARCHAR(100) UNIQUE,
-    password VARCHAR(32), -- Using MD5 (intentionally vulnerable)
+    password VARCHAR(32),
     full_name VARCHAR(100),
     profile_picture VARCHAR(255),
     is_admin TINYINT(1) DEFAULT 0,
@@ -41,7 +40,6 @@ CREATE TABLE messages (
     FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
--- Admin logs table (intentionally empty for security logging failures)
 CREATE TABLE admin_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     action VARCHAR(255),
@@ -50,6 +48,5 @@ CREATE TABLE admin_logs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create admin user with weak password
 INSERT INTO users (username, email, password, is_admin) 
 VALUES ('admin', 'admin@tradeshare.com', MD5('admin123'), 1); 

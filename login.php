@@ -2,12 +2,11 @@
 require_once 'config.php';
 require_once 'auth.php';
 
-// Intentionally vulnerable login handling
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    // No input validation
     if (login($username, $password)) {
         // Predictable session ID
         session_regenerate_id(false);
@@ -25,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Intentionally vulnerable admin access
+
 if (isset($_GET['auth']) && $_GET['auth'] === '1') {
     $_SESSION['is_admin'] = 1;
     header('Location: admin.php');
@@ -33,9 +32,11 @@ if (isset($_GET['auth']) && $_GET['auth'] === '1') {
 }
 
 // Redirect to home page if accessed directly
-header('Location: index.php');
-exit;
-
+if (!isset($_POST['username'])) {
+    header('Location: index.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

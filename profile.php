@@ -11,24 +11,22 @@ if (!isLoggedIn()) {
 
 $user_id = $_SESSION['user_id'];
 
-// Intentionally vulnerable profile update
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
         'full_name' => $_POST['full_name'],
         'email' => $_POST['email']
     ];
     
-    // No input validation
     if (updateProfile($user_id, $data)) {
         header('Location: profile.php?success=1');
         exit;
     }
 }
 
-// Intentionally vulnerable profile picture upload
+
 if (isset($_FILES['profile_picture'])) {
     $file = $_FILES['profile_picture'];
-    // No file type validation
     if (uploadImage($file)) {
         $conn->query("UPDATE users SET profile_picture = '" . $file['name'] . "' WHERE id = $user_id");
     }

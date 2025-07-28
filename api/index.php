@@ -4,12 +4,11 @@ require_once '../auth.php';
 
 header('Content-Type: application/json');
 
-// Intentionally vulnerable API endpoints
+
 $action = $_GET['action'] ?? '';
 
 switch ($action) {
     case 'login':
-        // SQL Injection vulnerability
         $username = $_POST['username'];
         $password = $_POST['password'];
         $query = "SELECT * FROM users WHERE username = '$username' AND password = '" . md5($password) . "'";
@@ -28,7 +27,6 @@ switch ($action) {
         break;
         
     case 'register':
-        // No input validation
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -46,7 +44,6 @@ switch ($action) {
         break;
         
     case 'services':
-        // SQL Injection vulnerability
         $keyword = $_GET['keyword'] ?? '';
         $query = "SELECT s.*, u.username 
                   FROM services s 
@@ -70,7 +67,6 @@ switch ($action) {
             break;
         }
         
-        // No input validation
         $title = $_POST['title'];
         $description = $_POST['description'];
         $price = $_POST['price'];
@@ -92,7 +88,6 @@ switch ($action) {
             break;
         }
         
-        // Broken Access Control - no user verification
         $service_id = $_POST['service_id'];
         $title = $_POST['title'];
         $description = $_POST['description'];
@@ -119,7 +114,6 @@ switch ($action) {
             break;
         }
         
-        // Broken Access Control - no user verification
         $service_id = $_POST['service_id'];
         $query = "DELETE FROM services WHERE id = $service_id";
         
@@ -136,7 +130,6 @@ switch ($action) {
             break;
         }
         
-        // Unsafe JSON handling
         $settings = json_decode($_POST['payload'], true);
         $settings_json = json_encode($settings);
         
@@ -150,7 +143,6 @@ switch ($action) {
         break;
         
     case 'url_preview':
-        // SSRF vulnerability
         $url = $_GET['url'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
